@@ -1,0 +1,19 @@
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @document.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @document.text %>
+</p>
+
+<p>
+  <strong>Categories:</strong>
+  <%= @document.categories %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>
