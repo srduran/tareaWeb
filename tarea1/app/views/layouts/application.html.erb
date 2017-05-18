@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <p class="navbar-text pull-right">
-      <% if person_signed_in? %>
-          Logged in as <strong><%= current_person.email %></strong>.
-          <%= link_to 'Edit profile', edit_person_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_person_session_path, method: :delete, :class => 'navbar-link'  %>
-      <% else %>
-          <%= link_to "Sign up", new_person_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_person_session_path, :class => 'navbar-link'  %>
-      <% end %>
-    </p>
+    <nav class="navbar navbar-toggleable-xl navbar-light bg-faded">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Brand -->
+      <a class="navbar-brand">Tarea 1</a>
+
+      <!-- Links -->
+      <div class="navbar-nav" id="nav-content">
+        <% if person_signed_in? %>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a><%= link_to 'Categories', categories_path, :class => 'nav-link' %></a></li>
+              </li>
+              <li class="nav-item">
+                <a><%= link_to 'Documents', documents_path, :class => 'nav-link' %></a></li>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-toggler-right">
+              <li class="nav-item">
+                <a>Logged in as <strong><%= current_person.email %></strong></a>
+              </li>
+              <li class="nav-item">
+                <a><%= link_to "Edit profile", edit_person_registration_path, :class => 'nav-link' %></a></li>
+              <li class="nav-item">
+              <a><%= link_to "Logout", destroy_person_session_path, method: :delete, :class => 'nav-link'  %></a>
+              </li>
+            </ul>
+          <% else %>
+            <ul class="navbar-nav navbar-toggler-right">
+              <li class="nav-item">
+                <a><%= link_to "Sign up", new_person_registration_path, :class => 'nav-link'  %></a></li>
+              <li class="nav-item">
+              <a><%= link_to "Login", new_person_session_path, :class => 'nav-link'  %></a>
+              </li>
+            </ul>
+          <% end %>
+      </div>
+    </nav>
+
     <title>Tarea1</title>
     <%= csrf_meta_tags %>
 
@@ -25,6 +56,8 @@
     <% if alert %>
         <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= yield %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
   </body>
 </html>
