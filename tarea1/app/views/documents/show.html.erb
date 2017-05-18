@@ -17,3 +17,11 @@
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>
+<br>
+<br>
+<hr>
+
+<p>
+  <strong>Document View:</strong>
+  <%= markdown(@document.text).html_safe %>
+</p>
