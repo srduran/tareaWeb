@@ -18,7 +18,12 @@
       <tr>
         <td><%= document.title %></td>
         <td><%= document.text %></td>
-        <td><%= document.categories %></td>
+          <% @show_enrollments.where("document_id = ?", document.id).each do |enrollment|%>
+              <td class="badge badge-pill badge-info">
+                <%= enrollment.category.title %>
+              </td>
+          <%end%>
+        </td>
         <td><%= link_to 'Show', document %></td>
         <td><%= link_to 'Edit', edit_document_path(document) %></td>
         <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>

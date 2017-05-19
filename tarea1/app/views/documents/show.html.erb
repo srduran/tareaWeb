@@ -6,7 +6,9 @@
 <p>
   <strong>Categories:</strong>
   <% @show_enrollments.each do |enrollment|%>
-      <%= enrollment.category.title %>
+      <a class="badge badge-pill badge-info">
+        <%= enrollment.category.title %>
+      </a>
   <%end%>
 </p>
 

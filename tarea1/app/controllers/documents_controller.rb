@@ -5,6 +5,7 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     @documents = Document.all
+    @show_enrollments = Enrollment.all
   end
 
   # GET /documents/1
@@ -29,6 +30,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
+        Enrollment.create(:category_id => @document.categories_id, :document_id => @document.id)
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
