@@ -12,7 +12,9 @@
 
 <p>
   <strong>Categories:</strong>
-  <%= @document.categories %>
+  <% @show_enrollments.each do |enrollment|%>
+      <%= enrollment.category.title %>
+  <%end%>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |

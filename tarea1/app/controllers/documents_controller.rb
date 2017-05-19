@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
 
   # GET /documents
   # GET /documents.json
@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @show_enrollments = Enrollment.where("document_id = ?", params[:id])
   end
 
   # GET /documents/new
