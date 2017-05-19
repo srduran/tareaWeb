@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= f.label :category_id %>
-    <%= f.select :category, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
+    <%= f.select :category_id, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
   </div>
 
   <div class="field">
     <%= f.label :document_id %>
-    <%= f.select :document, options_for_select(Document.all.map{|s|[s.to_s, s.id]}) %>
+    <%= f.select :document_id, options_for_select(Document.all.map{|s|[s.to_s, s.id]}) %>
   </div>
 
   <div class="actions">
