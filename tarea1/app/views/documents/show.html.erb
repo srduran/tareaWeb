@@ -5,11 +5,11 @@
 <br>
 <p>
   <strong>Categories:</strong>
-  <% @show_enrollments.each do |enrollment|%>
-      <a class="badge badge-pill badge-info">
-        <%= enrollment.category.title %>
-      </a>
-  <%end%>
+  <a class="badge badge-pill badge-info">
+    <% @show_enrollments.each do |enrollment|%>
+      [<%= enrollment.category.title %>]
+    <%end%>
+  </a>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |
