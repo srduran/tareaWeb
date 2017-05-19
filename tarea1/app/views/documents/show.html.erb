@@ -1,15 +1,8 @@
 
-
-<p>
-  <strong>Title:</strong>
-  <%= @document.title %>
-</p>
-
-<p>
-  <strong>Text:</strong>
-  <%= @document.title %>
-</p>
-
+<br>
+<br>
+<br>
+<br>
 <p>
   <strong>Categories:</strong>
   <% @show_enrollments.each do |enrollment|%>
@@ -24,6 +17,9 @@
 <hr>
 
 <div class="container-fluid">
-  <strong>Document View:</strong>
-  <%= markdown(@document.text).html_safe %>
+  <strong>Title:</strong>
+  <%= @document.title %>
+  <div class="text-container">
+    <%= markdown(@document.text).html_safe %>
+  </div>
 </div>

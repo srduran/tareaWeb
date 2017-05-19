@@ -13,16 +13,19 @@
 
   <div class="field">
     <%= f.label :title %>
+    <br>
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
+  <div class="text-field">
     <%= f.label :text %>
+    <br>
     <%= f.text_area :text %>
   </div>
 
   <div class="field">
     <%= f.label :categories_id %>
+    <br>
     <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
   </div>
 
