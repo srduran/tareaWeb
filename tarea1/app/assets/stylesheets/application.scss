@@ -6,6 +6,14 @@ html {
   color: #d9d9d9;
 }
 
+.btn-default{
+  background-color: #9da1a4;
+}
+
+.btn-default:hover{
+  color: ivory;
+}
+
 .navbar-brand{
   border: 1px solid ivory;
   background-color: #aeaeae;
@@ -69,6 +77,14 @@ h1, h2{
   text-align: left;
 }
 
+.table-buttons{
+  max-width: 180px;
+}
+
+.table-categories{
+  max-width: 450px;
+}
+
 table{
   border-collapse: collapse;
   width: 100%;
@@ -119,5 +135,5 @@ a:hover{
 }
 
 a:visited{
-  color: #d65200;
+  color: #6e0002;
 }

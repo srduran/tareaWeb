@@ -4,7 +4,9 @@
 <h1>Documents</h1>
 
 <% if @documents.blank? %>
-    <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
+    <h6>There are no documents containing the term "<%= params[:search] %>".</h6>
+<% else %>
+    <h6>Searching for "<%= params[:search] %>" in documents.</h6>
 <% end %>
 
 <table class="table table-striped">
@@ -29,9 +31,11 @@
             </span>
           <%end%>
         </td>
-        <td><%= link_to 'Show', document, :class => 'btn btn-default btn-sm' %></td>
-        <td><%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm' %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-sm' %></td>
+        <td class="table-buttons">
+          <%= link_to 'Show', document, :class => 'btn btn-default btn-sm' %>
+          <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm' %>
+          <%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-sm' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
