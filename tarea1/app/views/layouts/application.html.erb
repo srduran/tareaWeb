@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <nav class="navbar navbar-toggleable-xl navbar-light bg-faded">
+    <nav class="navbar navbar-toggleable-xl navbar-light text-white">
 
 
       <!-- Brand -->
@@ -13,42 +13,38 @@
       </button>-->
 
       <!-- Links -->
-      <div class="navbar-holder" id="nav-content">
+      <div class="navbar-brand navigation-bar" id="nav-content">
         <% if person_signed_in? %>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a><%= link_to 'Categories', categories_path, :class => 'nav-link' %></a></li>
-              </li>
-              <li class="nav-item">
-                <a><%= link_to 'Documents', documents_path, :class => 'nav-link' %></a></li>
-              </li>
-            </ul>
-            <ul class="navbar-profile navbar-toggler-right">
-              <li class="nav-item-profile">
-                <a>Logged in as <strong><%= current_person.email %></strong></a>
-              </li>
-              <li class="nav-item-profile-button">
-                <a><%= link_to "Edit profile", edit_person_registration_path, :class => 'nav-link' %></a></li>
-              <li class="nav-item-profile-button">
-                <a><%= link_to "Logout", destroy_person_session_path, method: :delete, :class => 'nav-link'  %></a>
-              </li>
-            </ul>
+            <div class="btn-group navigation">
+              <%= link_to 'Home', root_path, :class => 'btn btn-default btn-sm' %>
+              <%= link_to 'Categories', categories_path, :class => 'btn btn-default btn-sm' %>
+              <%= link_to 'Documents', documents_path, :class => 'btn btn-default btn-sm' %>
+            </div>
+
+            <div class="btn-group profile">
+              <kbd class="profile-name">Logged in as <strong><%= current_person.email %></strong></kbd>
+              <%= link_to "Edit profile", edit_person_registration_path, :class => 'btn btn-default btn-sm' %>
+              <%= link_to "Logout", destroy_person_session_path, method: :delete, :class => 'btn btn-default btn-sm'  %>
+            </div>
 
           <% else %>
-            <ul class="navbar-profile navbar-toggler-right">
-              <li class="nav-item">
-                <a><%= link_to "Sign up", new_person_registration_path, :class => 'nav-link'  %></a></li>
-              <li class="nav-item">
-              <a><%= link_to "Login", new_person_session_path, :class => 'nav-link'  %></a>
-              </li>
-            </ul>
+            <div class="btn-group profile">
+              <%= link_to "Sign up", new_person_registration_path, :class => 'btn btn-default btn-sm'  %>
+              <%= link_to "Login", new_person_session_path, :class => 'btn btn-default btn-sm'  %>
+            </div>
           <% end %>
       </div>
     </nav>
+    <p>
+    <div class="search-bar">
+      <%= form_tag(documents_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search Documents" %>
+          <%= submit_tag "Search", :name => nil %>
+      <% end %>
+    </div>
 
     <title>Tarea1</title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'navbar' , media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

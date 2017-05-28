@@ -5,15 +5,15 @@
 <br>
 <p>
   <strong>Categories:</strong>
-  <a class="badge badge-pill badge-info">
     <% @show_enrollments.each do |enrollment|%>
-      [<%= enrollment.category.title %>]
+      <a class="badge badge-info">
+        <%= enrollment.category.title %>
+      </a>
     <%end%>
-  </a>
 </p>
 
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
+<%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
+<%= link_to 'Back', documents_path, :class => 'btn btn-default btn-sm' %>
 <br>
 <br>
 <hr>
