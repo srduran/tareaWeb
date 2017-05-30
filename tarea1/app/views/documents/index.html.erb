@@ -16,6 +16,7 @@
       <th>Title</th>
       <th>Text</th>
       <th>Categories</th>
+      <th>Public</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,6 +32,13 @@
               [<%= enrollment.category.title %>]
             </span>
           <%end%>
+        </td>
+        <td class="text-content">
+          <% if document.public %>
+              <%= "Yes" %>
+          <% else %>
+              <%= "No" %>
+          <% end %>
         </td>
         <td class="table-buttons">
           <%= link_to 'Show', document, :class => 'btn btn-default btn-sm' %>

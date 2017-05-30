@@ -1,3 +1,4 @@
+<% if Category.exists? %>
 <%= form_for(document) do |f| %>
   <% if document.errors.any? %>
     <div id="error_explanation">
@@ -25,13 +26,23 @@
 
   <div class="field">
     <%= f.label :categories_id %>
-    <br>
     <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
   </div>
 
+    <div class="field">
+      <%= f.label :public %>
+      <%= f.check_box :public %>
+    </div>
+    <br>
   <div class="actions">
     <%= f.submit "Submit", :class => 'btn btn-success btn-sm' %>
   </div>
 
 
 <% end %>
+<%else%>
+    <div>
+      <%="You must create a category first"%>
+    </div>
+    <br>
+<%end%>

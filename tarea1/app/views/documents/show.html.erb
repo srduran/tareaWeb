@@ -6,6 +6,13 @@
         <%= enrollment.category.title %>
       </a>
     <%end%>
+    <br>
+    <strong>Public:</strong>
+    <% if @document.public %>
+        <%= "Yes"%>
+    <%else%>
+        <%= "No"%>
+    <%end%>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
