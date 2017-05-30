@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'rails-bootstrap-markdown'
+gem 'bootstrap-sass'
 gem 'redcarpet'
 # gem install bcrypt --platform=ruby
 gem 'bcrypt', platforms: :ruby if Gem.win_platform?

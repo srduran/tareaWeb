@@ -21,8 +21,11 @@
   <div class="text-field">
     <%= f.label :text %>
     <br>
-    <%= f.text_area :text %>
+    <div class="text-preview">
+    <%= f.text_area :text , 'data-provide' => "markdown", 'data-iconlibrary' => "fa", class: "form-control" %>
+    </div>
   </div>
+
 
   <div class="field">
     <%= f.label :categories_id %>
@@ -37,7 +40,6 @@
   <div class="actions">
     <%= f.submit "Submit", :class => 'btn btn-success btn-sm' %>
   </div>
-
 
 <% end %>
 <%else%>
