@@ -1,5 +1,10 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :show]
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
+
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
+  skip_before_action :authenticate_person!, :only => [:index, :show], raise: false
+
+
   # GET /documents
   # GET /documents.json
   def index
@@ -12,6 +17,8 @@ class DocumentsController < ApplicationController
     @show_enrollments = Enrollment.all
   end
 
+ # GET /documents/1
+  # GET /documents/1.json
   def my_documents
 
     @authors = Author.where("person_id = ?", current_person.id)
@@ -21,10 +28,12 @@ class DocumentsController < ApplicationController
     end
 
     @show_enrollments = Enrollment.all
-  end
-
-  def show
-    @show_enrollments = Enrollment.where("document_id = ?", params[:id])
+  end  def show
+    if !@document.public and !person_signed_in?
+      redirect_to documents_path, alert: "No permissions"
+    else
+      @show_enrollments = Enrollment.where("document_id = ?", params[:id])
+    end
   end
 
   # GET /documents/new
