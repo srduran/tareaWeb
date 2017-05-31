@@ -8,6 +8,9 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
+    if user_signed_in?
+      
+    end
     @documents = Document.all
     if params[:search]
       @documents = Document.search(params[:search]).order("created_at DESC")
@@ -28,7 +31,9 @@ class DocumentsController < ApplicationController
     end
 
     @show_enrollments = Enrollment.all
-  end  def show
+  end
+
+  def show
     if !@document.public and !person_signed_in?
       redirect_to documents_path, alert: "No permissions"
     else
