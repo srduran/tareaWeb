@@ -1,23 +1,44 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
+
+  before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
   skip_before_action :authenticate_person!, :only => [:index, :show], raise: false
 
 
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
-    if params[:search]
-      @documents = Document.search(params[:search]).order("created_at DESC")
+    if !person_signed_in?
+      @documents = Document.where("public = ?", true)
+      if params[:search]
+        @documents = Document.where("public  = ?", true).search(params[:search]).order("created_at DESC")
+      else
+        @documents = Document.where("public  = ?", true).order("created_at DESC")
+      end
     else
-      @documents = Document.all.order("created_at DESC")
+      @documents = Document.all
+      if params[:search]
+        @documents = Document.search(params[:search]).order("created_at DESC")
+      else
+        @documents = Document.all.order("created_at DESC")
+      end
     end
     @show_enrollments = Enrollment.all
   end
 
-
-  # GET /documents/1
+ # GET /documents/1
   # GET /documents/1.json
+  def my_documents
+
+    @authors = Author.where("person_id = ?", current_person.id)
+    @documents = []
+    @authors.each do |author|
+      @documents.append (Document.find(author.document_id))
+    end
+
+    @show_enrollments = Enrollment.all
+  end
+
   def show
     if !@document.public and !person_signed_in?
       redirect_to documents_path, alert: "No permissions"
@@ -43,6 +64,7 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.save
         Enrollment.create(:category_id => @document.categories_id, :document_id => @document.id)
+        Author.create(:document_id => @document.id, :person_id => current_person.id)
         format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
@@ -69,6 +91,8 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
+    Author.where("document_id = ?", @document.id).first().destroy
+    Enrollment.where("document_id =?", @document.id).first().destroy
     @document.destroy
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
