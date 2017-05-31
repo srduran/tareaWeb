@@ -8,14 +8,20 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    if user_signed_in?
-      
-    end
-    @documents = Document.all
-    if params[:search]
-      @documents = Document.search(params[:search]).order("created_at DESC")
+    if !person_signed_in?
+      @documents = Document.where("public = ?", true)
+      if params[:search]
+        @documents = Document.where("public  = ?", true).search(params[:search]).order("created_at DESC")
+      else
+        @documents = Document.where("public  = ?", true).order("created_at DESC")
+      end
     else
-      @documents = Document.all.order("created_at DESC")
+      @documents = Document.all
+      if params[:search]
+        @documents = Document.search(params[:search]).order("created_at DESC")
+      else
+        @documents = Document.all.order("created_at DESC")
+      end
     end
     @show_enrollments = Enrollment.all
   end
