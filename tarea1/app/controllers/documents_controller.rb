@@ -1,5 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
+  skip_before_action :authenticate_person!, :only => [:index, :show], raise: false
+
 
   # GET /documents
   # GET /documents.json
@@ -13,10 +15,15 @@ class DocumentsController < ApplicationController
     @show_enrollments = Enrollment.all
   end
 
+
   # GET /documents/1
   # GET /documents/1.json
   def show
-    @show_enrollments = Enrollment.where("document_id = ?", params[:id])
+    if !@document.public and !person_signed_in?
+      redirect_to documents_path, alert: "No permissions"
+    else
+      @show_enrollments = Enrollment.where("document_id = ?", params[:id])
+    end
   end
 
   # GET /documents/new
@@ -77,6 +84,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:title, :text, :categories_id)
+      params.require(:document).permit(:title, :text, :categories_id, :public)
     end
 end

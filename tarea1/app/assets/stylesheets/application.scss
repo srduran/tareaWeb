@@ -5,6 +5,9 @@ html {
   background-color: #cecece;
   color: #d9d9d9;
 }
+.btn-toolbar{
+  background-color: #aaaaaa;
+}
 
 .btn-default{
   background-color: #9da1a4;
@@ -62,11 +65,12 @@ html {
   margin:5px;
 }
 
-.text-container{
-  border: grey 5px solid;
+.text-container,.text-preview{
+  border: grey 1px solid;
   background-color: ghostwhite;
-  padding: 10px;
-  margin: 10px;
+  overflow: scroll;
+  padding: 0;
+  margin: 0;
 }
 
 #notice, .alert{
@@ -118,7 +122,7 @@ th {
 
 textarea{
   padding: 4px;
-  width: 90%;
+  width: 100%;
   min-height: 400px;
 }
 
