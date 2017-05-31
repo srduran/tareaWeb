@@ -3,6 +3,13 @@
 <br>
 <h1>Documents</h1>
 
+<% if @documents.blank? %>
+    <h6>There are no documents containing the term "<%= params[:search] %>".</h6>
+<% end %>
+<% if !params[:search].nil? %>
+    <h6>Searching for "<%= params[:search] %>" in documents.</h6>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -17,16 +24,19 @@
     <% @documents.each do |document| %>
       <tr>
         <td><%= document.title %></td>
-        <td><%= document.text %></td>
-        <td class="badge badge-pill badge-info">
+        <td class="text-content"><%= document.text %></td>
+        <td class="text-categories">
           <% @show_enrollments.where("document_id = ?", document.id).each do |enrollment|%>
+            <span class="badge badge-info">
               [<%= enrollment.category.title %>]
+            </span>
           <%end%>
         </td>
+        <td class="table-buttons">
+          <%= link_to 'Show', document, :class => 'btn btn-default btn-sm' %>
+          <%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-default btn-sm' %>
+          <%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-sm' %>
         </td>
-        <td><%= link_to 'Show', document %></td>
-        <td><%= link_to 'Edit', edit_document_path(document) %></td>
-        <td><%= link_to 'Destroy', document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +44,4 @@
 
 <br>
 
-<%= link_to 'New Document', new_document_path %>
+<%= link_to 'New Document', new_document_path, :class => 'btn btn-default btn-sm' %>
