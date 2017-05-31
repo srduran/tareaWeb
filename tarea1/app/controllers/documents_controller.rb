@@ -1,7 +1,5 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
-
-  before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
   skip_before_action :authenticate_person!, :only => [:index, :show], raise: false
 
 
@@ -54,6 +52,9 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1/edit
   def edit
+    # if @document.save
+    #   @category = Category.where("categories_id=?", current_category.id)
+    # end
   end
 
   # POST /documents
