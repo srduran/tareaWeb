@@ -7,4 +7,8 @@ class Person < ApplicationRecord
   validates :last_name, {presence: true, length: {in:3..30}}
   validates :email, {presence: true, length: {maximum: 50}, uniqueness: true}
   validates :password, {presence: true, length: {minimum: 8}, confirmation: true}
+
+  def to_s
+    return (first_name + " " +last_name)
+  end
 end
