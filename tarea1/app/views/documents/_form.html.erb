@@ -26,17 +26,30 @@
     </div>
   </div>
 
-
   <div class="field">
     <%= f.label :categories_id %>
-    <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
+    <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.title,s.id]}) %>
+
+    <!-- Todavía no hace mucho -->
+    <%= select_tag 'category-select' , options_for_select(Category.all.collect{|s|[s.title, s.id]}) %>
+    <button type="button" id="add-category" class="Add btn-success btn-sm">
+      Add
+    </button>
+    <div class="create-categories" id="all-categories">
+    <% @show_enrollments.each do |enrollment|%>
+        <a class="badge badge-info">
+          <%= enrollment.category.title %>
+        </a>
+    <%end%>
+    </div>
+    <!-- fin de segmento -->
   </div>
 
-    <div class="field">
-      <%= f.label :public %>
-      <%= f.check_box :public %>
-    </div>
-    <br>
+  <div class="field">
+    <%= f.label :public %>
+    <%= f.check_box :public %>
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit "Submit", :class => 'btn btn-success btn-sm' %>
   </div>
@@ -48,3 +61,14 @@
     </div>
     <br>
 <%end%>
+
+<!-- No es muy util todavía -->
+<script>
+  $(document).ready(function (){
+     $("#add-category").click(function (){
+         var category = $("#category-select").find(":selected").text();
+         var newHtml =  "<a class='badge badge-info'> " + category  + "</a> ";
+         $("#all-categories").append(newHtml);
+     });
+  });
+</script>
