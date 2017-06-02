@@ -1,3 +1,6 @@
+<%= javascript_include_tag 'Markdown.Converter', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'document', 'data-turbolinks-track': 'reload' %>
+
 <% if Category.exists? %>
 <%= form_for(document) do |f| %>
   <% if document.errors.any? %>
@@ -21,22 +24,41 @@
   <div class="text-field">
     <%= f.label :text %>
     <br>
-    <div class="text-preview">
-    <%= f.text_area :text , 'data-provide' => "markdown", 'data-iconlibrary' => "fa", class: "form-control" %>
+    <div class="document-preview">
+      <div class="text-document" >
+        <%= f.text_area :text , id: "text-doc" %>
+      </div>
+      <div class="preview-document" >
+        <div id="preview-doc" >
+
+        </div>
+      </div>
     </div>
   </div>
-
-
   <div class="field">
     <%= f.label :categories_id %>
-    <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
+    <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.title,s.id]}) %>
+
+    <!-- Todavía no hace mucho -->
+    <!--%= select_tag 'category-select' , options_for_select(Category.all.collect{|s|[s.title, s.id]}) %-->
+    <button type="button" id="add-category" class="Add btn-success btn-sm">
+      Add
+    </button>
+    <div class="create-categories" id="all-categories">
+    <% @show_enrollments.each do |enrollment|%>
+        <a class="badge badge-info">
+          <%= enrollment.category.title %>
+        </a>
+    <%end%>
+    </div>
+    <!-- fin de segmento -->
   </div>
 
-    <div class="field">
-      <%= f.label :public %>
-      <%= f.check_box :public %>
-    </div>
-    <br>
+  <div class="field">
+    <%= f.label :public %>
+    <%= f.check_box :public %>
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit "Submit", :class => 'btn btn-success btn-sm' %>
   </div>
@@ -48,3 +70,20 @@
     </div>
     <br>
 <%end%>
+
+<!--
+<script>
+  $(document).ready(function (){
+     $("#text-doc").keyup(function () {
+         convert()
+     })
+  });
+</script>
+<script>
+    var converter = new Markdown.Converter();
+    function convert() {
+        var area = document.getElementById('text-doc');
+        var preview = document.getElementById('preview-doc');
+        preview.innerHTML = converter.makeHtml(area.value);
+    }
+</script>
