@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20170531045146) do
 
   create_table "authors", force: :cascade do |t|
-    t.integer  "person_id", null: false
-    t.integer  "document_id", null: false
+    t.integer  "person_id"
+    t.integer  "document_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["document_id"], name: "index_authors_on_document_id"
