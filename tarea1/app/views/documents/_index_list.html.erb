@@ -1,6 +1,6 @@
 <% if @documents.blank? %>
     <h6>There are no documents containing the term "<%= params[:search] %>".</h6>
-<% elsif !params[:search].nil? %>
+<% else %>
     <h6>Searching for "<%= params[:search] %>" in documents.</h6>
 <% end %>
 

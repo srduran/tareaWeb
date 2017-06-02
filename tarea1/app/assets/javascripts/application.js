@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require Markdown.Converter
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
