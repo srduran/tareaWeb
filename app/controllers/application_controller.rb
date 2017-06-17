@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  puts("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :documents_path
   before_action :authenticate_person!
