@@ -1,6 +1,6 @@
 
 <p>
-  <strong>Categories:</strong>
+  <strong><Categor></Categor>ies:</strong>
     <% @show_enrollments.each do |enrollment|%>
       <a class="badge badge-info">
         <%= enrollment.category.title %>
@@ -13,6 +13,9 @@
     <%else%>
         <%= "No"%>
     <%end%>
+    <br>
+  <strong>Like:</strong>
+    <button id="like" type='button' class ='btn btn-link glyphicon glyphicon-heart gray'>holaa</button>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
