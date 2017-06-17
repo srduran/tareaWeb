@@ -1,0 +1,27 @@
+<%= form_for(enrollment) do |f| %>
+  <% if enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+
+      <ul>
+      <% enrollment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category_id %>
+    <%= f.select :category_id, options_for_select(Category.all.map{|s|[s.to_s, s.id]}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :document_id %>
+    <%= f.select :document_id, options_for_select(Document.all.map{|s|[s.to_s, s.id]}) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
