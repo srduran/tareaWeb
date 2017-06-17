@@ -15,7 +15,11 @@
     <%end%>
     <br>
   <strong>Like:</strong>
-    <button id="like" type='button' class ='btn btn-link glyphicon glyphicon-heart gray'>holaa</button>
+    <button id="like" type='button' class ='btn btn-link'>
+      <span class="glyphicon glyphicon-heart gray">
+        hola
+      </span>
+    </button>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
@@ -31,3 +35,10 @@
     <%= markdown(@document.text).html_safe %>
   </div>
 </div>
+
+<script>
+    $("button").click(function () {
+        $(this).toggleClass('active');
+        $(this).blur();
+    });
+</script>
