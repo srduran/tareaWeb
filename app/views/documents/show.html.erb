@@ -1,6 +1,6 @@
 
 <p>
-  <strong><Categor></Categor>ies:</strong>
+  <strong>Categories:</strong>
     <% @show_enrollments.each do |enrollment|%>
       <a class="badge badge-info">
         <%= enrollment.category.title %>
@@ -16,8 +16,7 @@
     <br>
   <strong>Like:</strong>
     <button id="like" type='button' class ='btn btn-link'>
-      <span class="glyphicon glyphicon-heart gray">
-        hola
+      <span class="glyphicon glyphicon-heart">
       </span>
     </button>
 </p>
