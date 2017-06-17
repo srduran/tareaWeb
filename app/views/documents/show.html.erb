@@ -1,6 +1,6 @@
 
 <p>
-  <strong><Categor></Categor>ies:</strong>
+  <strong>Categories:</strong>
     <% @show_enrollments.each do |enrollment|%>
       <a class="badge badge-info">
         <%= enrollment.category.title %>
@@ -15,7 +15,9 @@
     <%end%>
     <br>
   <strong>Like:</strong>
-    <button id="like" type='button' class ='btn btn-link glyphicon glyphicon-heart gray'>holaa</button>
+    <button type="button" class="btn btn-link glyphicon glyphicon-heart gray">
+      hola
+    </button>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |

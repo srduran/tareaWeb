@@ -33,12 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
-gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'rails-bootstrap-markdown'
-gem 'bootstrap-sass'
 gem 'redcarpet'
 # gem install bcrypt --platform=ruby
 gem 'bcrypt', platforms: :ruby if Gem.win_platform?
+
 gem 'wdm', '~> 0.1.1' if Gem.win_platform?
 
 gem 'execjs'
@@ -64,3 +62,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'autoprefixer-rails'
+gem 'rails-bootstrap-markdown'
+gem 'bootstrap-sass', '~> 3.3.6'
