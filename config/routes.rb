@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes
   resources :suggestions
   devise_scope :person do
     get "/sign_in" => "devise/sessions#new" # custom path to login/sign_in

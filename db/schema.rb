@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531045146) do
+ActiveRecord::Schema.define(version: 20170618022933) do
 
   create_table "authors", force: :cascade do |t|
     t.integer  "person_id"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 20170531045146) do
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_enrollments_on_category_id"
     t.index ["document_id"], name: "index_enrollments_on_document_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "document_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["document_id"], name: "index_likes_on_document_id"
+    t.index ["person_id"], name: "index_likes_on_person_id"
   end
 
   create_table "people", force: :cascade do |t|
