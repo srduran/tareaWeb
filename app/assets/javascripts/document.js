@@ -18,23 +18,24 @@ function getLikeCount(doc_id) {
         dataType: "json",
         success: function (result) {
             var button = $("#like-button");
-            button.html(' ' + + result.likingPeople);
+            button.html(' ' + result.likingPeople);
             if (result.iLikeIt) {
-                button.addClass("active");
+                button.toggleClass("active");
             }
+
             console.log(result.iLikeIt);
         }
     })
 }
 
-function addLike(){
+function addLike(doc_id){
     $.ajax({
         type:"POST",
-        url: "/likes/1/add",
+        url: "/likes/" + doc_id + "/add",
         dataType: "json",
         success: function (result) {
             var button = $("#like-button");
-            button.html(' ' + + result.likingPeople);
+            button.html(' ' + result.likingPeople);
             if (result.iLikeIt) {
                 button.addClass("active");
             }
@@ -43,14 +44,14 @@ function addLike(){
     })
 }
 
-function removeLike(){
+function removeLike(doc_id){
     $.ajax({
         type:"DELETE",
-        url: "/likes/1/remove",
+        url: "/likes/" + doc_id + "/remove",
         dataType: "json",
         success: function (result) {
             var button = $("#like-button");
-            button.html(' ' + + result.likingPeople);
+            button.html(' ' + result.likingPeople);
             console.log(result)
         }
     })
@@ -66,15 +67,16 @@ $(document).ready(function (){
     //need to add a table for "likes" of some kind.
     like_button.ready(function () {
         var doc_id = $("#doc_id").attr('data-id');
-        getLikeCount(+doc_id);
+        getLikeCount(doc_id);
     });
 
     like_button.click(function () {
+        var doc_id = $("#doc_id").attr('data-id');
         if ($(this).hasClass("active")){
-            removeLike();
+            removeLike(doc_id);
         }
         else{
-            addLike();
+            addLike(doc_id);
         }
         $(this).toggleClass("active");
         $(this).blur();
