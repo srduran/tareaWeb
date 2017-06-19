@@ -21,35 +21,55 @@ class LikesController < ApplicationController
   def edit
   end
 
-  # def addLike
-  #   document_id = params[:document_id]
-  #   @like = Like.new
-  #   @like.document_id = document_id
-  #   @like.person_id = current_person.id
-  #   @like.save
-  #   jsonObj = {"likingPeople" => getLikingPeople(document_id).length}
-  #   respond_to do |format|
-  #     format.html
-  #     format.json { render json: jsonObj }
-  #   end
-  # end
-  #
-  # def getLikingPeople(document_id)
-  #   @document = Document.find(document_id)
-  #   @likes = @document.likes
-  #   return @likes
-  # end
-  #
-  # def removeLike
-  #   document_id = params[:document_id]
-  #   @like = current_person.likes.where('document_id = ?', "#{document_id}").first
-  #   Like.destroy(@like.id)
-  #   jsonObj = {"likingPeople" => getInterestedPeople(document_id).length}
-  #   respond_to do |format|
-  #     format.html
-  #     format.json { render json: jsonObj }
-  #   end
-  # end
+  def addLike
+    document_id = params[:id]
+    @like = Like.new
+    @like.document_id = document_id
+    @like.person_id = current_person.id
+    @like.save
+    jsonObj = {"likingPeople" => getLikes(document_id).length,
+                "iLikeIt" => checkLike(document_id)
+              }
+    respond_to do |format|
+      format.json { render json: jsonObj }
+    end
+  end
+
+  def getLikingPeople()
+    document_id = params[:id]
+    puts document_id
+    puts "hi"
+    jsonObj = {"likingPeople" => getLikes(document_id).length,
+               "iLikeIt" => checkLike(document_id)
+              }
+    respond_to do |format|
+      format.json { render json: jsonObj }
+    end
+  end
+
+  def checkLike(document_id)
+    return current_person.likes.where('document_id = ?', "#{document_id}").length > 0
+  end
+
+  def getLikes(document_id)
+    @document = Document.find(document_id)
+    @likes = @document.likes
+    return @likes
+  end
+
+  def removeLike
+    document_id = params[:id]
+    puts "document id:"
+    puts document_id
+    @like = current_person.likes.where('document_id = ?', "#{document_id}").first
+    Like.destroy(@like.id)
+    jsonObj = {"likingPeople" => getLikes(document_id).length,
+               "iLikeIt" => checkLike(document_id)
+    }
+    respond_to do |format|
+      format.json { render json: jsonObj }
+    end
+  end
 
   # POST /likes
   # POST /likes.json

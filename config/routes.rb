@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :likes
+
   resources :suggestions
   devise_scope :person do
     get "/sign_in" => "devise/sessions#new" # custom path to login/sign_in
@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   #end
   resources :documents do
     get 'my_documents', to: 'documents#my_documents', on: :member
+    end
+  resources :likes do
+    post 'add', to: 'likes#addLike', on: :member
+    get 'count', to: 'likes#getLikingPeople', on: :member
+    delete 'remove', to: 'likes#removeLike', on: :member
   end
   resources :authors
   resources :enrollments
