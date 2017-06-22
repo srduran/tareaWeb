@@ -20,5 +20,9 @@
   <%= @suggestion.status %>
 </p>
 
+<p>
+  <%= link_to 'Comment Suggestion', suggestions_path %>
+</p>
+
 <%= link_to 'Edit', edit_suggestion_path(@suggestion) %> |
 <%= link_to 'Back', suggestions_path %>
