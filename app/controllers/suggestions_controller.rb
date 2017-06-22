@@ -17,7 +17,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1
   # GET /suggestions/1.json
   def show
-    @comments = Comment.where("suggestion_id = ?", params[:suggestion_id])
+    @comments = Comment.where("suggestion_id = ?", @suggestion.id)
   end
 
   # GET /suggestions/new
@@ -51,7 +51,7 @@ class SuggestionsController < ApplicationController
   def update
     respond_to do |format|
       if @suggestion.update(suggestion_params)
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
+        format.html { redirect_to [@document, @suggestion], notice: 'Suggestion was successfully updated.' }
         format.json { render :show, status: :ok, location: @suggestion }
       else
         format.html { render :edit }
