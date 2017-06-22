@@ -1,0 +1,27 @@
+<strong>Comments</strong>
+
+<table>
+  <thead>
+    <tr>
+      <th>Suggestion</th>
+      <th>Comment text</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.suggestion %></td>
+        <td><%= comment.comment_text %></td>
+        <td><%= link_to 'Show', [@suggestion, comment] %></td>
+        <td><%= link_to 'Edit', edit_suggestion_comment_path(id: comment.id) %></td>
+        <td><%= link_to 'Destroy', [@suggestion, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_document_suggestion_comment_path(suggestion_id: @suggestion.id) %>

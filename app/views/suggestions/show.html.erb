@@ -20,5 +20,12 @@
   <%= @suggestion.status %>
 </p>
 
-<%= link_to 'Edit', edit_suggestion_path(@suggestion) %> |
-<%= link_to 'Back', suggestions_path %>
+<%= link_to 'Edit', edit_document_suggestion_path(@suggestion) %> |
+<%= link_to 'Back', document_suggestions_path %>
+
+<p>
+  <%= render 'comments/index', suggestion: @suggestion %>
+</p>
+
+
+

@@ -11,6 +11,13 @@ class Suggestion < ApplicationRecord
   #attr_readonly :status
 
   def self.search(search)
+    if search == "All"
+      search = ""
+    end
     where("status LIKE ?", "%#{search}%")
+  end
+
+  def to_s
+    return text
   end
 end

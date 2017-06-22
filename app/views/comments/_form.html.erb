@@ -1,4 +1,4 @@
-<%= form_for(comment) do |f| %>
+<%= form_for([document, suggestion, comment]) do |f| %>
   <% if comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -10,11 +10,6 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :suggestion_id %>
-    <%= f.text_field :suggestion_id %>
-  </div>
 
   <div class="field">
     <%= f.label :comment_text %>
