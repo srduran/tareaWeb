@@ -1,0 +1,32 @@
+<%= form_for(suggestion) do |f| %>
+  <% if suggestion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(suggestion.errors.count, "error") %> prohibited this suggestion from being saved:</h2>
+
+      <ul>
+      <% suggestion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :document_id %>
+    <%= f.select :document_id, options_for_select(Document.all.map{|s|[s.to_s, s.id]}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select :status, options_for_select(Suggestion::STATUS_OPTIONS) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

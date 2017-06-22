@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170617192716) do
+ActiveRecord::Schema.define(version: 20170617194232) do
 
   create_table "authors", force: :cascade do |t|
     t.integer  "person_id"
@@ -68,13 +68,13 @@ ActiveRecord::Schema.define(version: 20170617192716) do
 
   create_table "suggestions", force: :cascade do |t|
     t.integer  "document_id"
-    t.integer  "author_id"
+    t.integer  "person_id"
     t.text     "text"
     t.string   "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["author_id"], name: "index_suggestions_on_author_id"
     t.index ["document_id"], name: "index_suggestions_on_document_id"
+    t.index ["person_id"], name: "index_suggestions_on_person_id"
   end
 
 end
