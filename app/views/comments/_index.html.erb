@@ -11,12 +11,13 @@
 
   <tbody>
     <% @comments.each do |comment| %>
+      <% puts(comment)%>
       <tr>
         <td><%= comment.suggestion %></td>
         <td><%= comment.comment_text %></td>
-        <td><%= link_to 'Show', [@suggestion, comment] %></td>
-        <td><%= link_to 'Edit', edit_suggestion_comment_path(id: comment.id) %></td>
-        <td><%= link_to 'Destroy', [@suggestion, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [@document, @suggestion, comment] %></td>
+        <td><%= link_to 'Edit', edit_document_suggestion_comment_path(id: comment.id, suggestion_id: @suggestion.id) %></td>
+        <td><%= link_to 'Destroy', [@document, @suggestion, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

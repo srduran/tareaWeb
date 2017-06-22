@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :set_suggestion
+  before_action :set_document
 
   # GET /comments
   # GET /comments.json
@@ -30,7 +31,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to [@suggestion], notice: 'Comment was successfully created.' }
+        format.html { redirect_to [@document, @suggestion], notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -74,6 +75,13 @@ class CommentsController < ApplicationController
         @suggestion = @comment.suggestion
       end
       @suggestion = Suggestion.find(params[:suggestion_id])
+    end
+
+    def set_document
+      if @suggestion and @suggestion.document_id
+        @document = @suggestion.document
+      end
+      @document = Document.find(params[:document_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
