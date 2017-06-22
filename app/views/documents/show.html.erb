@@ -12,18 +12,17 @@
     <%else%>
         <%= "No"%>
     <%end%>
-    <br>
-  <strong>Like:</strong>
+  <% if person_signed_in? %>
     <div data-id="<%= @document.id %>" id="doc_id"></div>
     <button id="like-button" type="button" class="btn btn-link glyphicon glyphicon-heart gray">
       0
     </button>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
 <%= link_to 'Suggestions', document_suggestions_path(@document), :class => 'btn btn-default btn-sm' %> |
 <%= link_to 'Back', documents_path, :class => 'btn btn-danger btn-sm' %>
-<br>
 <br>
 <hr>
 
