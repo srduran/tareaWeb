@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531045146) do
+ActiveRecord::Schema.define(version: 20170622004740) do
 
   create_table "authors", force: :cascade do |t|
     t.integer  "person_id"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20170531045146) do
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "suggestion_id"
+    t.text     "comment_text"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["suggestion_id"], name: "index_comments_on_suggestion_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -46,6 +54,15 @@ ActiveRecord::Schema.define(version: 20170531045146) do
     t.index ["document_id"], name: "index_enrollments_on_document_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "person_id"
+    t.integer  "document_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["document_id"], name: "index_likes_on_document_id"
+    t.index ["person_id"], name: "index_likes_on_person_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -64,6 +81,17 @@ ActiveRecord::Schema.define(version: 20170531045146) do
     t.string   "last_sign_in_ip"
     t.index ["email"], name: "index_people_on_email", unique: true
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.integer  "document_id"
+    t.integer  "person_id"
+    t.text     "text"
+    t.string   "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["document_id"], name: "index_suggestions_on_document_id"
+    t.index ["person_id"], name: "index_suggestions_on_person_id"
   end
 
 end

@@ -1,0 +1,14 @@
+<p id="notice" class="alert alert-success"><%= notice %></p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @like.person %>
+</p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @like.document %>
+</p>
+
+<%= link_to 'Edit', edit_like_path(@like) %> |
+<%= link_to 'Back', likes_path %>
