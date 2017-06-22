@@ -6,11 +6,7 @@ Rails.application.routes.draw do
   end
   get 'people/sign_up' => redirect('people/sign_in')
   get 'people/new' => redirect('people/sign_in')
-  devise_for :people#, :skip => [:registrations]
-  #as :person do
-  #  get 'people/edit' => 'devise/registrations#edit', :as => 'edit_person_registration'
-  #  put 'people/' => 'devise/registrations#update', :as => 'person_registration'
-  #end
+  devise_for :people
   resources :documents do
     get 'my_documents', to: 'documents#my_documents', on: :member
   end
