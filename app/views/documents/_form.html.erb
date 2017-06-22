@@ -15,7 +15,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :title %>
     <br>
     <%= f.text_field :title %>
@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :categories_id %>
     <%= f.select :categories_id, options_for_select(Category.all.map{|s|[s.title,s.id]}) %>
 
@@ -54,7 +54,7 @@
     <!-- fin de segmento -->
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :public %>
     <%= f.check_box :public %>
   </div>
@@ -70,20 +70,3 @@
     </div>
     <br>
 <%end%>
-
-<!--
-<script>
-  $(document).ready(function (){
-     $("#text-doc").keyup(function () {
-         convert()
-     })
-  });
-</script>
-<script>
-    var converter = new Markdown.Converter();
-    function convert() {
-        var area = document.getElementById('text-doc');
-        var preview = document.getElementById('preview-doc');
-        preview.innerHTML = converter.makeHtml(area.value);
-    }
-</script>

@@ -1,4 +1,3 @@
---
 <p>
   <strong>Categories:</strong>
     <% @show_enrollments.each do |enrollment|%>
@@ -15,8 +14,9 @@
     <%end%>
     <br>
   <strong>Like:</strong>
-    <button type="button" class="btn btn-link glyphicon glyphicon-heart gray">
-      hola
+    <div data-id="<%= @document.id %>" id="doc_id"></div>
+    <button id="like-button" type="button" class="btn btn-link glyphicon glyphicon-heart gray">
+      0
     </button>
 </p>
 

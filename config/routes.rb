@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
   resources :suggestions
-  #devise_scope :person do
-  #  get "/sign_in" => "devise/sessions#new" # custom path to login/sign_in
-  #  get "/sign_up" => "devise/registrations#new", as: "new_person_registration" # custom path to sign_up/registration
-  #end
+  devise_scope :person do
+    get "/sign_in" => "devise/sessions#new" # custom path to login/sign_in
+    get "/sign_up" => "devise/registrations#new", as: "new_person_registration" # custom path to sign_up/registration
+  end
+  get 'people/sign_up' => redirect('people/sign_in')
+  get 'people/new' => redirect('people/sign_in')
   devise_for :people#, :skip => [:registrations]
   #as :person do
   #  get 'people/edit' => 'devise/registrations#edit', :as => 'edit_person_registration'
@@ -11,6 +14,11 @@ Rails.application.routes.draw do
   #end
   resources :documents do
     get 'my_documents', to: 'documents#my_documents', on: :member
+    end
+  resources :likes do
+    post 'add', to: 'likes#addLike', on: :member
+    get 'count', to: 'likes#getLikingPeople', on: :member
+    delete 'remove', to: 'likes#removeLike', on: :member
   end
   resources :authors
   resources :enrollments
