@@ -1,6 +1,6 @@
 <h1>Editing Comment</h1>
 
-<%= render 'form', comment: @comment %>
+<%= render 'form', comment: @comment, suggestion: @suggestion %>
 
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', suggestion_comments_path %>
+<%= link_to 'Show', [@document, @suggestion, @comment] %> |
+<%= link_to 'Back', document_suggestion_comments_path %>

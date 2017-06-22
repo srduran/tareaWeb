@@ -1,5 +1,6 @@
 class SuggestionsController < ApplicationController
   before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
+  before_action :set_document
 
   # GET /suggestions
   # GET /suggestions.json
@@ -16,6 +17,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1
   # GET /suggestions/1.json
   def show
+    @comments = Comment.where("suggestion_id = ?", @suggestion.id)
   end
 
   # GET /suggestions/new
@@ -35,7 +37,7 @@ class SuggestionsController < ApplicationController
 
     respond_to do |format|
       if @suggestion.save
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.' }
+        format.html { redirect_to [@document, @suggestion], notice: 'Suggestion was successfully created.' }
         format.json { render :show, status: :created, location: @suggestion }
       else
         format.html { render :new }
@@ -49,7 +51,7 @@ class SuggestionsController < ApplicationController
   def update
     respond_to do |format|
       if @suggestion.update(suggestion_params)
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
+        format.html { redirect_to [@document, @suggestion], notice: 'Suggestion was successfully updated.' }
         format.json { render :show, status: :ok, location: @suggestion }
       else
         format.html { render :edit }
@@ -72,6 +74,13 @@ class SuggestionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_suggestion
       @suggestion = Suggestion.find(params[:id])
+    end
+
+    def set_document
+      if @suggestion and @suggestion.document_id
+        @document = @suggestion.document
+      end
+      @document = Document.find(params[:document_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

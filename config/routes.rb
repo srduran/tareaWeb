@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
 
-  resources :suggestions do
-    resources :comments
-  end
   devise_scope :person do
     get "/sign_in" => "devise/sessions#new" # custom path to login/sign_in
     get "/sign_up" => "devise/registrations#new", as: "new_person_registration" # custom path to sign_up/registration
   end
-  get 'people/sign_up' => redirect('people/sign_in')
-  get 'people/new' => redirect('people/sign_in')
+  #get 'people/sign_up' => redirect('people/sign_in')
+  #get 'people/new' => redirect('people/sign_in')
   devise_for :people
   resources :documents do
     get 'my_documents', to: 'documents#my_documents', on: :member
+    resources :suggestions do
+      resources :comments
+    end
     end
   resources :likes do
     post 'add', to: 'likes#addLike', on: :member
