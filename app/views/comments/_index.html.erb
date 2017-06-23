@@ -1,6 +1,6 @@
 <strong>Comments</strong>
 <% @comments.each do |comment| %>
-    <blockquote>
+    <blockquote class="comment-block">
       <%= comment.comment_text %>
     </blockquote>
     <!--<%= link_to 'Edit', edit_document_suggestion_comment_path(id: comment.id, suggestion_id: @suggestion.id), :class => 'btn btn-default btn-sm' %>-->
