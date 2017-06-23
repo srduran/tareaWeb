@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :comment_text %>
     <%= f.text_area :comment_text %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit Comment", :class => 'btn btn-success btn-sm'%>
   </div>
 <% end %>

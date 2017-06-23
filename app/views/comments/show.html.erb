@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
 
 <p>
   <strong>Suggestion:</strong>
@@ -7,8 +9,10 @@
 
 <p>
   <strong>Comment text:</strong>
-  <%= @comment.comment_text %>
+  <blockquote>
+    <%= @comment.comment_text %>
+  </blockquote>
 </p>
 
-<%= link_to 'Edit', edit_document_suggestion_comment_path([@suggestion, @comment]) %> |
-<%= link_to 'Back', document_suggestion_path(id: @suggestion.id) %>
+<%= link_to 'Edit', edit_document_suggestion_comment_path([@suggestion, @comment]), :class => 'btn btn-default btn-sm' %> |
+<%= link_to 'Back', document_suggestion_path(id: @suggestion.id), :class => 'btn btn-danger btn-sm' %>

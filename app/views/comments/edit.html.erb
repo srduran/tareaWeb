@@ -2,6 +2,6 @@
 
 <%= render 'form', comment: @comment, suggestion: @suggestion %>
 
-<%= link_to 'Show', [@document, @suggestion, @comment] %> |
-<%= link_to 'Back', document_suggestion_path(id: @suggestion.id) %>
+<%= link_to 'Show', [@document, @suggestion, @comment] , :class => 'btn btn-default btn-sm'%> |
+<%= link_to 'Back', document_suggestion_path(id: @suggestion.id) , :class => 'btn btn-danger btn-sm'%>
 
