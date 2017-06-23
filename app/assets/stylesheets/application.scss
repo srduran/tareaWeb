@@ -172,8 +172,17 @@ a:visited{
   color: #6e0002;
 }
 
-blockquote{
+.comment-block{
   background-color: white;
   border: 1px solid black;
   font-size: small;
+  max-width: 86%;
+}
+
+.suggestion-block{
+  background-color: lightgray;
+  border: 1px solid black;
+  font-size: medium;
+  max-width: 90%;
+  min-height: 100px;
 }
