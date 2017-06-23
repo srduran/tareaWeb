@@ -19,7 +19,7 @@
     </button>
   <% end %>
 </p>
-<% if @is_author %>
+<% if @is_author && !@not_authors.empty? %>
     <%= form_for(@author) do |f| %>
         <% if @author.errors.any? %>
             <div id="error_explanation">
@@ -43,6 +43,8 @@
           <%= f.submit %>
         </div>
     <% end %>
+<% end %>
+<% if @is_author %>
     <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
 <% end %>
 <%= link_to 'Suggestions', document_suggestions_path(@document), :class => 'btn btn-default btn-sm' %> |

@@ -7,7 +7,11 @@ class SuggestionsController < ApplicationController
   # GET /suggestions.json
 
   def check_author
-    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    if person_signed_in?
+      @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    else
+      @is_author = false
+    end
   end
 
   def index
