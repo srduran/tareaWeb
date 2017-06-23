@@ -40,16 +40,10 @@
         </div>
 
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit "Create Author", :class => 'btn btn-success btn-sm' %>
         </div>
     <% end %>
 <% end %>
-<% if @is_author %>
-    <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
-<% end %>
-<%= link_to 'Suggestions', document_suggestions_path(@document), :class => 'btn btn-default btn-sm' %> |
-<%= link_to 'Back', documents_path, :class => 'btn btn-danger btn-sm' %>
-<br>
 <hr>
 
 <div class="container-fluid">
@@ -59,3 +53,10 @@
     <%= markdown(@document.text).html_safe %>
   </div>
 </div>
+<hr>
+<% if @is_author %>
+    <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
+<% end %>
+<%= link_to 'Suggestions', document_suggestions_path(@document), :class => 'btn btn-default btn-sm' %> |
+<%= link_to 'Back', documents_path, :class => 'btn btn-danger btn-sm' %>
+<br>
