@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
   skip_before_action :authenticate_person!, :only => [:index, :show], raise: false
-  before_action :check_author, :except => [:index, :my_documents, :new]
+  before_action :check_author, only:[:show, :edit, :destroy]
 
   # GET /documents
   # GET /documents.json
