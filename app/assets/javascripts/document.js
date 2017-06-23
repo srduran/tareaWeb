@@ -52,6 +52,9 @@ function removeLike(doc_id){
         success: function (result) {
             var button = $("#like-button");
             button.html(' ' + result.likingPeople);
+            if (!result.iLikeIt){
+                button.removeClass("active");
+            }
             console.log(result)
         }
     })
@@ -78,7 +81,7 @@ $(document).ready(function (){
         else{
             addLike(doc_id);
         }
-        $(this).toggleClass("active");
+        //$(this).toggleClass("active");
         $(this).blur();
     });
 });
