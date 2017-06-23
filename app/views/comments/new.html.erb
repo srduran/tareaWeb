@@ -2,4 +2,4 @@
 
 <%= render 'form', comment: @comment, suggestion: @suggestion, document: @document %>
 
-<%= link_to 'Back', document_suggestion_comments_path %>
+<%= link_to 'Back', document_suggestion_path(id: @suggestion.id), :class => 'btn btn-danger btn-sm' %>

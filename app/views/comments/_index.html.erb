@@ -1,28 +1,33 @@
 <strong>Comments</strong>
+<% @comments.each do |comment| %>
+    <blockquote class="comment-block">
+      <%= comment.comment_text %>
+    </blockquote>
+    <!--<%= link_to 'Edit', edit_document_suggestion_comment_path(id: comment.id, suggestion_id: @suggestion.id), :class => 'btn btn-default btn-sm' %>-->
+    <!--<%= link_to 'Destroy', [@document, @suggestion, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-sm' %>-->
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Suggestion</th>
-      <th>Comment text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!--<table class="table table-striped table-bordered table-hover table-categories">-->
+  <!--<thead>-->
+    <!--<tr>-->
+      <!--<th>Suggestion</th>-->
+      <!--<th>Comment text</th>-->
+      <!--<th colspan="3"></th>-->
+    <!--</tr>-->
+  <!--</thead>-->
 
-  <tbody>
-    <% @comments.each do |comment| %>
-      <% puts(comment)%>
-      <tr>
-        <td><%= comment.suggestion %></td>
-        <td><%= comment.comment_text %></td>
-        <td><%= link_to 'Show', [@document, @suggestion, comment] %></td>
-        <td><%= link_to 'Edit', edit_document_suggestion_comment_path(id: comment.id, suggestion_id: @suggestion.id) %></td>
-        <td><%= link_to 'Destroy', [@document, @suggestion, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <!--<tbody>-->
+    <!--<% @comments.each do |comment| %>-->
+      <!--<% puts(comment)%>-->
+      <!--<tr>-->
+        <!--<td><%= comment.suggestion %></td>-->
+        <!--<td><%= comment.comment_text %></td>-->
+        <!--<td><%= link_to 'Show', [@document, @suggestion, comment], :class => 'btn btn-default btn-sm' %></td>-->
+        <!--<td><%= link_to 'Edit', edit_document_suggestion_comment_path(id: comment.id, suggestion_id: @suggestion.id), :class => 'btn btn-default btn-sm' %></td>-->
+        <!--<td><%= link_to 'Destroy', [@document, @suggestion, comment], method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-sm' %></td>-->
+      <!--</tr>-->
+    <!--<% end %>-->
+  <!--</tbody>-->
+<!--</table>-->
 
-<br>
-
-<%= link_to 'New Comment', new_document_suggestion_comment_path(suggestion_id: @suggestion.id) %>
+<%= link_to 'New Comment', new_document_suggestion_comment_path(suggestion_id: @suggestion.id), :class => 'btn btn-default btn-sm' %>

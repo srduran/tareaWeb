@@ -1,10 +1,19 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy, :show_enrollments]
   skip_before_action :authenticate_person!, :only => [:index, :show], raise: false
-
+  before_action :check_author, :except => [:index, :my_documents]
 
   # GET /documents
   # GET /documents.json
+
+  def check_author
+    if person_signed_in?
+      @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    else
+      @is_author = false
+    end
+  end
+
   def index
     if !person_signed_in?
       @documents = Document.where("public = ?", true)
@@ -38,6 +47,15 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    if @is_author
+      @author = Author.new
+
+      @authors = Author.where("document_id = ?", @document.id)
+      @not_authors = Person.all
+      @authors.each do |author|
+        @not_authors = @not_authors.to_a - [Person.find(author.person_id)]
+      end
+    end
     if !@document.public and !person_signed_in?
       redirect_to documents_path, alert: "No permissions"
     else
@@ -53,6 +71,9 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1/edit
   def edit
+    if !@is_author
+      redirect_to documents_path, notice: 'You can not edit if you are not author'
+    end
     # if @document.save
     #   @category = Category.where("categories_id=?", current_category.id)
     # end
@@ -94,12 +115,16 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
+    if !@is_author
+      redirect_to documents_path, notice: 'You can not destroy if you are not author'
+    else
     Author.where("document_id = ?", @document.id).first().destroy
     Enrollment.where("document_id =?", @document.id).first().destroy
     @document.destroy
     respond_to do |format|
       format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
       format.json { head :no_content }
+    end
     end
   end
 

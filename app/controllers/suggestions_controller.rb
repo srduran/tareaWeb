@@ -1,11 +1,20 @@
 class SuggestionsController < ApplicationController
   before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
   before_action :set_document
+  before_action :check_author
 
   # GET /suggestions
   # GET /suggestions.json
+
+  def check_author
+    if person_signed_in?
+      @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    else
+      @is_author = false
+    end
+  end
+
   def index
-    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
     @suggestions = Suggestion.where("document_id = ?", @document.id)
     if params[:searchStatus]
       @suggestions = Suggestion.where("document_id = ?", @document.id).searchStatus(params[:searchStatus]).order("created_at DESC")
@@ -18,7 +27,9 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1
   # GET /suggestions/1.json
   def show
-    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    if @is_author
+      @author = Author.new
+    end
     @comments = Comment.where("suggestion_id = ?", @suggestion.id)
   end
 
@@ -29,6 +40,9 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
+    if !@is_author
+      redirect_to document_suggestions_url, notice: 'You can not edit if you are not author'
+    end
   end
 
   # POST /suggestions
@@ -65,10 +79,14 @@ class SuggestionsController < ApplicationController
   # DELETE /suggestions/1
   # DELETE /suggestions/1.json
   def destroy
-    @suggestion.destroy
-    respond_to do |format|
-      format.html { redirect_to document_suggestions_url, notice: 'Suggestion was successfully destroyed.' }
-      format.json { head :no_content }
+    if !@is_author
+      redirect_to document_suggestions_url, notice: 'You can not destroy if you are not author'
+    else
+     @suggestion.destroy
+     respond_to do |format|
+       format.html { redirect_to document_suggestions_url, notice: 'Suggestion was successfully destroyed.' }
+       format.json { head :no_content }
+     end
     end
   end
 
