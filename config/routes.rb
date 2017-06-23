@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'people/sign_up' => redirect('people/sign_in')
   get 'people/new' => redirect('people/sign_in')
   get 'authors' => redirect('documents')
+  get '/documents/:document_id/suggestions/:id/comments' => redirect('/documents/document_id/suggestions/id')
   devise_for :people
   resources :documents do
     get 'my_documents', to: 'documents#my_documents', on: :member
