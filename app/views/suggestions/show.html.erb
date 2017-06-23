@@ -19,8 +19,9 @@
   <strong>Status:</strong>
   <%= @suggestion.status %>
 </p>
-
+<%if @is_author%>
 <%= link_to 'Edit', edit_document_suggestion_path(@suggestion) %> |
+<%end%>
 <%= link_to 'Back', document_suggestions_path %>
 
 <p>

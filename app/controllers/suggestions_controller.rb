@@ -5,11 +5,12 @@ class SuggestionsController < ApplicationController
   # GET /suggestions
   # GET /suggestions.json
   def index
-    @suggestions = Suggestion.all
-    if params[:search]
-      @suggestions = Suggestion.all.search(params[:search]).order("created_at DESC")
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    @suggestions = Suggestion.where("document_id = ?", @document.id)
+    if params[:searchStatus]
+      @suggestions = Suggestion.where("document_id = ?", @document.id).searchStatus(params[:searchStatus]).order("created_at DESC")
     else
-      @suggestions = Suggestion.all.order("created_at DESC")
+      @suggestions = Suggestion.where("document_id = ?", @document.id).order("created_at DESC")
     end
 
   end
@@ -17,6 +18,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1
   # GET /suggestions/1.json
   def show
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
     @comments = Comment.where("suggestion_id = ?", @suggestion.id)
   end
 
@@ -65,7 +67,7 @@ class SuggestionsController < ApplicationController
   def destroy
     @suggestion.destroy
     respond_to do |format|
-      format.html { redirect_to suggestions_url, notice: 'Suggestion was successfully destroyed.' }
+      format.html { redirect_to document_suggestions_url, notice: 'Suggestion was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
