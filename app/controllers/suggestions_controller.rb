@@ -29,6 +29,11 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+
+    if !@is_author
+      redirect_to document_suggestions_url, notice: 'You can not edit if you are not author'
+    end
   end
 
   # POST /suggestions
