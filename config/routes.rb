@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     get "/sign_in" => "devise/sessions#new" # custom path to login/sign_in
     get "/sign_up" => "devise/registrations#new", as: "new_person_registration" # custom path to sign_up/registration
   end
-  #get 'people/sign_up' => redirect('people/sign_in')
+  get 'people/sign_up' => redirect('people/sign_in')
   get 'people/new' => redirect('people/sign_in')
+  get 'authors' => redirect('documents')
   devise_for :people
   resources :documents do
     get 'my_documents', to: 'documents#my_documents', on: :member
