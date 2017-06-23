@@ -2,9 +2,9 @@
 
 <h1>Suggestions</h1>
 <div class="search-bar">
-  <%= form_tag(document_suggestions_url, :method => "get", id: "search-form") do %>
-      <%= select_tag :search, options_for_select(["All", Suggestion::STATUS_OPTIONS[0], Suggestion::STATUS_OPTIONS[1], Suggestion::STATUS_OPTIONS[2]]) %>
-      <%= submit_tag "Search", :name => nil, :class => 'btn btn-default btn-sm' %>
+  <%= form_tag(document_suggestions_url, :method => "get", id: "searchStatus-form") do %>
+      <%= select_tag :searchStatus, options_for_select(["All", Suggestion::STATUS_OPTIONS[0], Suggestion::STATUS_OPTIONS[1], Suggestion::STATUS_OPTIONS[2]]) %>
+      <%= submit_tag "SearchStatus", :name => nil, :class => 'btn btn-default btn-sm' %>
   <% end %>
 </div>
 
@@ -27,7 +27,9 @@
         <td><%= suggestion.text %></td>
         <td><%= suggestion.status %></td>
         <td><%= link_to 'Show', [@document,suggestion] %></td>
+        <% if @is_author%>
         <td><%= link_to 'Edit', edit_document_suggestion_path(id: suggestion.id) %></td>
+        <%end%>
         <td><%= link_to 'Destroy', [@document, suggestion], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

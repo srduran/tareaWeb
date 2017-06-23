@@ -3,4 +3,5 @@
 <%= render 'form', comment: @comment, suggestion: @suggestion %>
 
 <%= link_to 'Show', [@document, @suggestion, @comment] %> |
-<%= link_to 'Back', document_suggestion_comments_path %>
+<%= link_to 'Back', document_suggestion_path(id: @suggestion.id) %>
+

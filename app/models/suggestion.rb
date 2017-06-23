@@ -10,11 +10,11 @@ class Suggestion < ApplicationRecord
   validates :status , {presence: true , inclusion: { in: STATUS_OPTIONS.map {|t| t.to_s } }}
   #attr_readonly :status
 
-  def self.search(search)
-    if search == "All"
-      search = ""
+  def self.searchStatus(searchStatus)
+    if searchStatus == "All"
+      searchStatus = ""
     end
-    where("status LIKE ?", "%#{search}%")
+    where("status LIKE ?", "%#{searchStatus}%")
   end
 
   def to_s
