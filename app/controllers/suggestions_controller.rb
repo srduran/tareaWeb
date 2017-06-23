@@ -70,10 +70,16 @@ class SuggestionsController < ApplicationController
   # DELETE /suggestions/1
   # DELETE /suggestions/1.json
   def destroy
-    @suggestion.destroy
-    respond_to do |format|
-      format.html { redirect_to document_suggestions_url, notice: 'Suggestion was successfully destroyed.' }
-      format.json { head :no_content }
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+
+    if !@is_author
+      redirect_to document_suggestions_url, notice: 'You can not destroy if you are not author'
+    else
+     @suggestion.destroy
+     respond_to do |format|
+       format.html { redirect_to document_suggestions_url, notice: 'Suggestion was successfully destroyed.' }
+       format.json { head :no_content }
+     end
     end
   end
 

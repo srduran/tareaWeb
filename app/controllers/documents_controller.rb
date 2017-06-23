@@ -53,10 +53,16 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1/edit
   def edit
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+
+    if !@is_author
+      redirect_to documents_url, notice: 'You can not edit if you are not author'
+    else
     # if @document.save
     #   @category = Category.where("categories_id=?", current_category.id)
     # end
-    @show_enrollments = Enrollment.where("document_id = ?", params[:id])
+      @show_enrollments = Enrollment.where("document_id = ?", params[:id])
+    end
   end
 
   # POST /documents
@@ -94,12 +100,18 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1
   # DELETE /documents/1.json
   def destroy
-    Author.where("document_id = ?", @document.id).first().destroy
-    Enrollment.where("document_id =?", @document.id).first().destroy
-    @document.destroy
-    respond_to do |format|
-      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
-      format.json { head :no_content }
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+
+    if !@is_author
+      redirect_to documents_url, notice: 'You can not destroy if you are not author'
+    else
+      Author.where("document_id = ?", @document.id).first().destroy
+      Enrollment.where("document_id =?", @document.id).first().destroy
+      @document.destroy
+      respond_to do |format|
+        format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
