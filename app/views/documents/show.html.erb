@@ -19,8 +19,32 @@
     </button>
   <% end %>
 </p>
+<% if @is_author %>
+    <%= form_for(@author) do |f| %>
+        <% if @author.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
 
-<%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
+              <ul>
+                <% @author.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :person_id %>
+          <%= f.select :person_id, options_for_select(@not_authors.map{|s|[s.to_s,s.id]}) %>
+          <%= f.hidden_field :document_id, value: @document.id %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+    <% end %>
+    <%= link_to 'Edit', edit_document_path(@document), :class => 'btn btn-default btn-sm' %> |
+<% end %>
 <%= link_to 'Suggestions', document_suggestions_path(@document), :class => 'btn btn-default btn-sm' %> |
 <%= link_to 'Back', documents_path, :class => 'btn btn-danger btn-sm' %>
 <br>

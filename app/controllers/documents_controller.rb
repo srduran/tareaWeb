@@ -38,6 +38,17 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+
+    if @is_author
+      @author = Author.new
+
+      @authors = Author.where("document_id = ?", @document.id)
+      @not_authors = Person.all
+      @authors.each do |author|
+        @not_authors = @not_authors.to_a - [Person.find(author.person_id)]
+      end
+    end
     if !@document.public and !person_signed_in?
       redirect_to documents_path, alert: "No permissions"
     else

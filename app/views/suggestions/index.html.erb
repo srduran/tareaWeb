@@ -29,8 +29,8 @@
         <td><%= link_to 'Show', [@document,suggestion] %></td>
         <% if @is_author%>
         <td><%= link_to 'Edit', edit_document_suggestion_path(id: suggestion.id) %></td>
-        <%end%>
         <td><%= link_to 'Destroy', [@document, suggestion], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>

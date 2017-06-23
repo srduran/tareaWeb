@@ -1,11 +1,16 @@
 class SuggestionsController < ApplicationController
   before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
   before_action :set_document
+  before_action :check_author
 
   # GET /suggestions
   # GET /suggestions.json
-  def index
+
+  def check_author
     @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+  end
+
+  def index
     @suggestions = Suggestion.where("document_id = ?", @document.id)
     if params[:searchStatus]
       @suggestions = Suggestion.where("document_id = ?", @document.id).searchStatus(params[:searchStatus]).order("created_at DESC")
@@ -18,7 +23,9 @@ class SuggestionsController < ApplicationController
   # GET /suggestions/1
   # GET /suggestions/1.json
   def show
-    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
+    if @is_author
+      @author = Author.new
+    end
     @comments = Comment.where("suggestion_id = ?", @suggestion.id)
   end
 
@@ -29,8 +36,6 @@ class SuggestionsController < ApplicationController
 
   # GET /suggestions/1/edit
   def edit
-    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
-
     if !@is_author
       redirect_to document_suggestions_url, notice: 'You can not edit if you are not author'
     end
@@ -70,8 +75,6 @@ class SuggestionsController < ApplicationController
   # DELETE /suggestions/1
   # DELETE /suggestions/1.json
   def destroy
-    @is_author = Author.where("person_id = ? AND document_id = ?", current_person.id, @document.id).present?
-
     if !@is_author
       redirect_to document_suggestions_url, notice: 'You can not destroy if you are not author'
     else
