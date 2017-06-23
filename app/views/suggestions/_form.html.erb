@@ -12,13 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :document_id %>
-    <%= f.select :document_id, options_for_select(Document.all.map{|s|[s.to_s, s.id]}) %>
-  </div>
-
-  <div class="field">
     <%= f.label :text %>
     <%= f.text_area :text %>
+    <%= f.hidden_field :document_id, value: @document.id %>
   </div>
 
   <div class="field">
