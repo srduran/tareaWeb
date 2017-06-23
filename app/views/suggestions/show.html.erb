@@ -23,10 +23,10 @@
 <%if @is_author%>
 <%= link_to 'Edit', edit_document_suggestion_path(@suggestion), :class => 'btn btn-default btn-sm' %> |
 <%end%>
-<%= link_to 'Back', document_suggestions_path, :class => 'btn btn-danger btn-sm' %>
+
 
 <p>
   <%= render 'comments/index', suggestion: @suggestion %>
 </p>
-
+<%= link_to 'Back', document_suggestions_path, :class => 'btn btn-danger btn-sm' %>
 

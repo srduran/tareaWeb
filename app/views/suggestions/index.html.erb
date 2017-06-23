@@ -38,4 +38,6 @@
   </tbody>
 </table>
 
+<%= link_to 'Back', document_path(@document.id), :class => 'btn btn-danger btn-sm' %> |
 <%= link_to 'New Suggestion', new_document_suggestion_path(document_id: @document.id), :class => 'btn btn-default btn-sm' %>
+<%= link_to 'Back', @document, :class => 'btn btn-danger btn-sm' %>
