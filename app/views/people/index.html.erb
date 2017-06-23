@@ -1,5 +1,6 @@
-<p id="notice" class="alert alert-success"><%= notice %></p>
-
+<% if notice %>
+  <p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
 <h1>People</h1>
 
 <table class="table table-striped">
@@ -20,9 +21,9 @@
         <td><%= person.last_name %></td>
         <td><%= person.email %></td>
         <td><%= person.password %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', person, :class => 'btn btn-default btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_person_path(person), :class => 'btn btn-default btn-sm' %></td>
+        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>
